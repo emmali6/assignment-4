@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <style>
+        .board{
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            gap: 2px;
+            background-color: #ccc;
+            padding: 2px;
+        }
+        .square{
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border: 1px solid #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+        .square:hover{
+            background-color: #00ff00;
+        }
+        .status, .turn-indicator{
+            border: 1px solid #999;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .win-condition{
+            border: 1px solid #999;
+            padding: 5px;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Tic Tac Toe</h1>
+        <div class="turn-indicator" id="turnIndicator">Turn: X</div>
+        <div class="board" id="board">
+        <script>
+            const NUM_SQUARES = 9;
+            const board = document.getElementById('board');
+            let currentPlayer = Math.random() < 0.5 ? 'X' : 'O';
+            let gameOver = false;
+            function handleSquareClick(event) {
+                if (!gameOver && event.target.classList.contains('square') && !event.target.textContent) {
+                    event.target.textContent = currentPlayer;
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    updatedTurnIndicator();
+                    checkForWin();
+                }
+            }
+            function updatedTurnIndicator() {
+                document.getElementById('turnIndicator').textContent = 'Turn: ' + currentPlayer;
+            }
+            board.addEventListener('click', handleSquareClick);
+            for (i = 0; i < NUM_SQUARES; i++){
+                const square = document.createElement('div');
+                square.classList.add('square');
+                square.setAttribute('id', 'sq' + i);
+                board.appendChild(square);
+            }
+        </script>
+        </div>
+        <div class="win-condition" id="winCondition">Win Condition</div>
+        <footer>DGMD E-28 Assignment 3 Harvard Extension School</footer>
+    </body>
+    </html>
